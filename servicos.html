@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vilão's Barber | Serviços</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+  <aside class="barra-lateral">
+    <div class="topo-lateral">
+      <h1 class="logo">Vilão's Barber</h1>
+      <label for="menu-toggle" class="btn-recolher" title="Recolher ou expandir menu">&#9776;</label>
+    </div>
+
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="servicos.html" class="ativo">Serviços</a></li>
+        <li><a href="agendar.html">Agendar</a></li>
+        <li><a href="agendamentos.html">Meus Agendamentos</a></li>
+        <li><button type="button" id="btn-tema" class="btn-secundario">Tema Escuro</button></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="conteudo-principal">
+    <main class="container">
+      <section class="cabecalho-pagina">
+        <h2>Catálogo de Serviços</h2>
+        <p>Filtre por categoria ou pesquise pelo nome do serviço.</p>
+
+        <div class="barra-filtros">
+          <input type="text" id="busca-servico" placeholder="Buscar serviço (ex: Corte, Barba...)">
+          <select id="filtro-categoria">
+            <option value="todos">Todas as categorias</option>
+            <option value="Cabelo">Cabelo</option>
+            <option value="Barba">Barba</option>
+            <option value="Combo">Combos</option>
+            <option value="Estética">Estética</option>
+          </select>
+        </div>
+      </section>
+
+      <section>
+        <div class="grid-cards" id="catalogo-servicos"></div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <p>&copy; 2026 Vilão's Barber - Prática de Programação (N2)</p>
+    </footer>
+  </div>
+
+  <script type="module" src="js/servicos.js"></script>
+</body>
+</html>

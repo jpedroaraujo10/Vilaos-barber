@@ -1,0 +1,470 @@
+/* Variáveis CSS para tema dinâmico */
+:root {
+  --cor-fundo: #f4f6f8;
+  --cor-superficie: #ffffff;
+  --cor-texto: #1e293b;
+  --cor-texto-suave: #64748b;
+  --cor-primaria: #b45309;
+  --cor-primaria-hover: #92400e;
+  --cor-borda: #cbd5e1;
+  --cor-erro: #c0392b;
+  --cor-sucesso: #27ae60;
+}
+
+body.escuro {
+  --cor-fundo: #0f172a;
+  --cor-superficie: #1e293b;
+  --cor-texto: #f1f5f9;
+  --cor-texto-suave: #94a3b8;
+  --cor-primaria: #d97706;
+  --cor-primaria-hover: #f59e0b;
+  --cor-borda: #334155;
+}
+
+/* Reset e Box Model */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout principal em linha: menu lateral à esquerda + conteúdo à direita */
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Checkbox invisível que controla abrir/recolher no clique */
+.menu-toggle {
+  display: none;
+}
+
+/* Barra lateral esquerda */
+.barra-lateral {
+  width: 240px;
+  background-color: #111827;
+  color: #ffffff;
+  border-right: 3px solid var(--cor-primaria);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width 0.25s ease;
+}
+
+.topo-lateral {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  font-size: 1.3rem;
+  color: #f59e0b;
+  white-space: nowrap;
+}
+
+/* Botão de recolher/expandir */
+.btn-recolher {
+  background-color: #1f2937;
+  color: #f59e0b;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-recolher:hover {
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu a {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  display: block;
+  white-space: nowrap;
+}
+
+.menu a:hover,
+.menu a.ativo {
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.menu .btn-secundario {
+  width: 100%;
+  margin-top: 0.5rem;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+}
+
+/* Estado recolhido ao clicar no botão (checkbox marcado) */
+.menu-toggle:checked ~ .barra-lateral {
+  width: 60px;
+  padding: 1rem 0.5rem;
+  align-items: center;
+}
+
+.menu-toggle:checked ~ .barra-lateral .logo,
+.menu-toggle:checked ~ .barra-lateral .menu {
+  display: none;
+}
+
+/* Coluna da direita (conteúdo + rodapé) */
+.conteudo-principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.container {
+  width: 92%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+main {
+  flex: 1;
+  padding: 1.5rem 0 3rem;
+}
+
+/* Botões */
+.btn-primario,
+.btn-outline,
+.btn-secundario,
+.btn-acao {
+  display: inline-block;
+  padding: 0.65rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-size: 0.95rem;
+}
+
+.btn-primario {
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.btn-primario:hover {
+  background-color: var(--cor-primaria-hover);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--cor-primaria);
+  color: var(--cor-primaria);
+}
+
+.btn-outline:hover {
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.btn-secundario {
+  background-color: #334155;
+  color: #ffffff;
+  font-size: 0.85rem;
+}
+
+.largura-total {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.hero {
+  background-color: var(--cor-superficie);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid var(--cor-borda);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+  margin-bottom: 0.75rem;
+}
+
+.hero p {
+  color: var(--cor-texto-suave);
+  margin-bottom: 1.5rem;
+}
+
+.acoes-hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* CSS Grid Responsivo */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.numero-destaque {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--cor-primaria);
+  margin-top: 0.5rem;
+}
+
+.badge-categoria {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.preco-card {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0.75rem 0;
+}
+
+.cabecalho-pagina {
+  margin-bottom: 1.5rem;
+}
+
+.barra-filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.layout-duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.campo-grupo {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-grupo label {
+  font-weight: bold;
+  margin-bottom: 0.35rem;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+select {
+  padding: 0.65rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-size: 1rem;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #2980b9;
+  outline-offset: 2px;
+}
+
+input.invalido,
+select.invalido {
+  border: 2px solid var(--cor-erro);
+}
+
+input.valido,
+select.valido {
+  border: 2px solid var(--cor-sucesso);
+}
+
+.erro {
+  color: var(--cor-erro);
+  font-size: 0.85rem;
+  min-height: 1.2rem;
+  margin-top: 0.2rem;
+}
+
+.linha-dupla {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.resumo-valores hr {
+  margin: 1rem 0;
+  border: 0;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.valor-total {
+  font-size: 1.25rem;
+  color: var(--cor-primaria);
+  margin-top: 0.5rem;
+}
+
+.feedback {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.feedback.sucesso {
+  color: var(--cor-sucesso);
+}
+
+.feedback.falha {
+  color: var(--cor-erro);
+}
+
+.tabela-responsiva {
+  overflow-x: auto;
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.tabela-agenda {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+.tabela-agenda th,
+.tabela-agenda td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.status-pendente {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-concluido {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-cancelado {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.btn-acao {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  margin-right: 0.35rem;
+  color: #ffffff;
+}
+
+.btn-concluir {
+  background-color: var(--cor-sucesso);
+}
+
+.btn-cancelar {
+  background-color: var(--cor-erro);
+}
+
+.oculto {
+  display: none;
+}
+
+.rodape {
+  background-color: #111827;
+  color: #94a3b8;
+  text-align: center;
+  padding: 1.25rem 0;
+  font-size: 0.9rem;
+}
+
+/* Ajuste para telas mobile estreitas (emulador) */
+@media (max-width: 600px) {
+  .barra-lateral {
+    width: 190px;
+  }
+
+  .menu-toggle:checked ~ .barra-lateral {
+    width: 48px;
+    padding: 0.75rem 0.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .barra-filtros {
+    flex-direction: row;
+  }
+
+  .barra-filtros input {
+    flex: 2;
+  }
+
+  .barra-filtros select {
+    flex: 1;
+  }
+
+  .linha-dupla {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .layout-duas-colunas {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}

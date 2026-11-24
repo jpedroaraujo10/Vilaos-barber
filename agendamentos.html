@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vilão's Barber | Meus Agendamentos</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+  <aside class="barra-lateral">
+    <div class="topo-lateral">
+      <h1 class="logo">Vilão's Barber</h1>
+      <label for="menu-toggle" class="btn-recolher" title="Recolher ou expandir menu">&#9776;</label>
+    </div>
+
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="agendar.html">Agendar</a></li>
+        <li><a href="agendamentos.html" class="ativo">Meus Agendamentos</a></li>
+        <li><button type="button" id="btn-tema" class="btn-secundario">Tema Escuro</button></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="conteudo-principal">
+    <main class="container">
+      <section class="cabecalho-pagina">
+        <h2>Horários Agendados</h2>
+        <p>Acompanhe, conclua ou cancele os agendamentos salvos no navegador.</p>
+
+        <div class="barra-filtros">
+          <select id="filtro-status">
+            <option value="todos">Todos os status</option>
+            <option value="Pendente">Pendentes</option>
+            <option value="Concluído">Concluídos</option>
+            <option value="Cancelado">Cancelados</option>
+          </select>
+          <button type="button" id="btn-limpar-cancelados" class="btn-outline">Limpar Cancelados</button>
+        </div>
+      </section>
+
+      <section class="tabela-responsiva">
+        <table class="tabela-agenda">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Serviço</th>
+              <th>Barbeiro</th>
+              <th>Data e Hora</th>
+              <th>Valor</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela-agendamentos"></tbody>
+        </table>
+        <p id="mensagem-vazia" class="oculto">Nenhum agendamento encontrado para este filtro.</p>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <p>&copy; 2026 Vilão's Barber - Prática de Programação (N2)</p>
+    </footer>
+  </div>
+
+  <script type="module" src="js/agendamentos.js"></script>
+</body>
+</html>

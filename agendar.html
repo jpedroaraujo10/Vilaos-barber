@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vilão's Barber | Agendar</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+  <aside class="barra-lateral">
+    <div class="topo-lateral">
+      <h1 class="logo">Vilão's Barber</h1>
+      <label for="menu-toggle" class="btn-recolher" title="Recolher ou expandir menu">&#9776;</label>
+    </div>
+
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="agendar.html" class="ativo">Agendar</a></li>
+        <li><a href="agendamentos.html">Meus Agendamentos</a></li>
+        <li><button type="button" id="btn-tema" class="btn-secundario">Tema Escuro</button></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="conteudo-principal">
+    <main class="container layout-duas-colunas">
+      <section class="card">
+        <h2>Marcar Horário</h2>
+        <form id="form-agendamento" novalidate>
+          <div class="campo-grupo">
+            <label for="cliente-nome">Nome completo</label>
+            <input type="text" id="cliente-nome" name="nome" required minlength="3" placeholder="Ex: João Pedro Silva">
+            <span class="erro" id="erro-cliente-nome"></span>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="cliente-telefone">Telefone / WhatsApp</label>
+            <input type="tel" id="cliente-telefone" name="telefone" required placeholder="(62) 99999-9999">
+            <span class="erro" id="erro-cliente-telefone"></span>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="select-servico">Serviço desejado</label>
+            <select id="select-servico" name="servico" required></select>
+            <span class="erro" id="erro-select-servico"></span>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="select-profissional">Profissional</label>
+            <select id="select-profissional" name="profissional" required>
+              <option value="">Selecione um barbeiro</option>
+              <option value="Carlos Mendes">Carlos Mendes</option>
+              <option value="Rafael Costa">Rafael Costa</option>
+              <option value="Lucas Alves">Lucas Alves</option>
+            </select>
+            <span class="erro" id="erro-select-profissional"></span>
+          </div>
+
+          <div class="linha-dupla">
+            <div class="campo-grupo">
+              <label for="data-agendamento">Data</label>
+              <input type="date" id="data-agendamento" name="data" required>
+              <span class="erro" id="erro-data-agendamento"></span>
+            </div>
+
+            <div class="campo-grupo">
+              <label for="hora-agendamento">Horário</label>
+              <select id="hora-agendamento" name="hora" required>
+                <option value="">Escolha</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+              </select>
+              <span class="erro" id="erro-hora-agendamento"></span>
+            </div>
+          </div>
+
+          <div class="campo-grupo">
+            <label class="checkbox-label">
+              <input type="checkbox" id="cliente-fidelidade" name="fidelidade">
+              Cliente Clube Fidelidade (15% de desconto)
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primario largura-total">Confirmar Agendamento</button>
+        </form>
+        <p id="feedback-formulario" class="feedback"></p>
+      </section>
+
+      <aside class="card resumo-valores">
+        <h3>Resumo do Atendimento</h3>
+        <p><strong>Serviço:</strong> <span id="resumo-nome-servico">Selecione um serviço</span></p>
+        <p><strong>Duração estimada:</strong> <span id="resumo-duracao">-</span></p>
+        <hr>
+        <p><strong>Subtotal:</strong> R$ <span id="resumo-subtotal">0,00</span></p>
+        <p><strong>Desconto:</strong> - R$ <span id="resumo-desconto">0,00</span></p>
+        <p class="valor-total"><strong>Total a pagar:</strong> R$ <span id="resumo-total">0,00</span></p>
+      </aside>
+    </main>
+
+    <footer class="rodape">
+      <p>&copy; 2026 Vilão's Barber - Prática de Programação (N2)</p>
+    </footer>
+  </div>
+
+  <script type="module" src="js/agendar.js"></script>
+</body>
+</html>

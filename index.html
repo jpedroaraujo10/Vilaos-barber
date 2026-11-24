@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vilão's Barber | Início</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <!-- Controle de recolher/expandir menu com clique -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+  <aside class="barra-lateral">
+    <div class="topo-lateral">
+      <h1 class="logo">Vilão's Barber</h1>
+      <label for="menu-toggle" class="btn-recolher" title="Recolher ou expandir menu">&#9776;</label>
+    </div>
+
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html" class="ativo">Início</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="agendar.html">Agendar</a></li>
+        <li><a href="agendamentos.html">Meus Agendamentos</a></li>
+        <li><button type="button" id="btn-tema" class="btn-secundario">Tema Escuro</button></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="conteudo-principal">
+    <main class="container">
+      <section class="hero">
+        <h2>Estilo, precisão e horário marcado sem espera</h2>
+        <p>Escolha o serviço, selecione seu barbeiro preferido e garanta seu horário.</p>
+        <div class="acoes-hero">
+          <a href="agendar.html" class="btn-primario">Agendar Agora</a>
+          <a href="servicos.html" class="btn-outline">Ver Serviços</a>
+        </div>
+      </section>
+
+      <section>
+        <h2>Resumo da Agenda</h2>
+        <div class="grid-cards">
+          <article class="card">
+            <h3>Total Marcado</h3>
+            <p class="numero-destaque" id="total-agendamentos">0</p>
+          </article>
+          <article class="card">
+            <h3>Pendentes</h3>
+            <p class="numero-destaque" id="total-pendentes">0</p>
+          </article>
+          <article class="card">
+            <h3>Concluídos</h3>
+            <p class="numero-destaque" id="total-concluidos">0</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Serviços em Destaque</h2>
+        <div class="grid-cards" id="lista-destaques"></div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <p>&copy; 2026 Vilão's Barber - Prática de Programação (N2)</p>
+    </footer>
+  </div>
+
+  <script type="module" src="js/home.js"></script>
+</body>
+</html>
