@@ -1,6 +1,11 @@
 import { formatarMoeda } from "./dados.js";
-import { carregar, salvar, CHAVE_AGENDAMENTOS } from "./storage.js";
+import { carregar, salvar, CHAVE_AGENDAMENTOS, obterUsuarioLogado } from "./storage.js";
 import { inicializarTema } from "./tema.js";
+
+const usuarioLogado = obterUsuarioLogado();
+if (!usuarioLogado) {
+  window.location.href = "login.html";
+}
 
 function formatarDataBR(dataISO) {
   const partes = dataISO.split("-");
@@ -10,11 +15,24 @@ function formatarDataBR(dataISO) {
   return partes[2] + "/" + partes[1] + "/" + partes[0];
 }
 
+function pertenceAoCliente(agendamento, usuario) {
+  if (agendamento.clienteEmail) {
+    return agendamento.clienteEmail.toLowerCase() === usuario.email.toLowerCase();
+  }
+  return agendamento.cliente.trim().toLowerCase() === usuario.nome.trim().toLowerCase();
+}
+
 function inicializarTabelaAgendamentos() {
   const tbody = document.querySelector("#corpo-tabela-agendamentos");
   const filtroStatus = document.querySelector("#filtro-status");
   const btnLimparCancelados = document.querySelector("#btn-limpar-cancelados");
   const msgVazia = document.querySelector("#mensagem-vazia");
+  const ehAdmin = usuarioLogado && usuarioLogado.tipo === "admin";
+
+  // Oculta ferramentas exclusivas do administrador quando o acesso for de cliente
+  if (!ehAdmin && btnLimparCancelados) {
+    btnLimparCancelados.style.display = "none";
+  }
 
   // Ciclo carregar -> modificar -> salvar -> renderizar
   function alterarStatus(id, novoStatus) {
@@ -38,6 +56,11 @@ function inicializarTabelaAgendamentos() {
 
     for (let i = 0; i < lista.length; i++) {
       const ag = lista[i];
+
+      // Cliente enxerga apenas os próprios agendamentos
+      if (!ehAdmin && !pertenceAoCliente(ag, usuarioLogado)) {
+        continue;
+      }
 
       if (statusSelecionado !== "todos" && ag.status !== statusSelecionado) {
         continue;
@@ -71,15 +94,18 @@ function inicializarTabelaAgendamentos() {
 
       const celulaAcoes = tr.querySelector(".celula-acoes");
 
-      // Criação dinâmica de botões e escuta de eventos click no DOM
+      // Criação dinâmica de botões conforme perfil (Admin vs Cliente)
       if (ag.status === "Pendente") {
-        const btnConcluir = document.createElement("button");
-        btnConcluir.type = "button";
-        btnConcluir.textContent = "Concluir";
-        btnConcluir.classList.add("btn-acao", "btn-concluir");
-        btnConcluir.addEventListener("click", function () {
-          alterarStatus(ag.id, "Concluído");
-        });
+        if (ehAdmin) {
+          const btnConcluir = document.createElement("button");
+          btnConcluir.type = "button";
+          btnConcluir.textContent = "Concluir";
+          btnConcluir.classList.add("btn-acao", "btn-concluir");
+          btnConcluir.addEventListener("click", function () {
+            alterarStatus(ag.id, "Concluído");
+          });
+          celulaAcoes.appendChild(btnConcluir);
+        }
 
         const btnCancelar = document.createElement("button");
         btnCancelar.type = "button";
@@ -88,8 +114,6 @@ function inicializarTabelaAgendamentos() {
         btnCancelar.addEventListener("click", function () {
           alterarStatus(ag.id, "Cancelado");
         });
-
-        celulaAcoes.appendChild(btnConcluir);
         celulaAcoes.appendChild(btnCancelar);
       } else {
         celulaAcoes.textContent = "Finalizado";
@@ -107,19 +131,21 @@ function inicializarTabelaAgendamentos() {
 
   filtroStatus.addEventListener("change", renderizarTabela);
 
-  btnLimparCancelados.addEventListener("click", function () {
-    const lista = carregar(CHAVE_AGENDAMENTOS, []);
-    const ativos = [];
+  if (ehAdmin && btnLimparCancelados) {
+    btnLimparCancelados.addEventListener("click", function () {
+      const lista = carregar(CHAVE_AGENDAMENTOS, []);
+      const ativos = [];
 
-    for (let i = 0; i < lista.length; i++) {
-      if (lista[i].status !== "Cancelado") {
-        ativos.push(lista[i]);
+      for (let i = 0; i < lista.length; i++) {
+        if (lista[i].status !== "Cancelado") {
+          ativos.push(lista[i]);
+        }
       }
-    }
 
-    salvar(CHAVE_AGENDAMENTOS, ativos);
-    renderizarTabela();
-  });
+      salvar(CHAVE_AGENDAMENTOS, ativos);
+      renderizarTabela();
+    });
+  }
 
   renderizarTabela();
 }

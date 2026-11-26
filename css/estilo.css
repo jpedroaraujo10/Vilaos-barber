@@ -1,28 +1,34 @@
-/* Variáveis CSS para tema dinâmico */
+/* Variáveis CSS para tema dinâmico (Preto, Branco e Dourado) */
 :root {
-  --cor-fundo: #f4f6f8;
+  --cor-fundo: #fafafa;
   --cor-superficie: #ffffff;
-  --cor-texto: #1e293b;
-  --cor-texto-suave: #64748b;
-  --cor-primaria: #b45309;
-  --cor-primaria-hover: #92400e;
-  --cor-borda: #cbd5e1;
-  --cor-erro: #c0392b;
-  --cor-sucesso: #27ae60;
+  --cor-texto: #111111;
+  --cor-texto-suave: #525252;
+  --cor-primaria: #b8860b;
+  --cor-primaria-hover: #966c08;
+  --cor-menu: #111111;
+  --cor-menu-texto: #ffffff;
+  --cor-borda: #e5e5e5;
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --cor-sucesso: #16a34a;
+  --cor-erro: #dc2626;
 }
 
 body.escuro {
-  --cor-fundo: #0f172a;
-  --cor-superficie: #1e293b;
-  --cor-texto: #f1f5f9;
-  --cor-texto-suave: #94a3b8;
-  --cor-primaria: #d97706;
-  --cor-primaria-hover: #f59e0b;
-  --cor-borda: #334155;
+  --cor-fundo: #0b0b0b;
+  --cor-superficie: #161616;
+  --cor-texto: #f5f5f5;
+  --cor-texto-suave: #a3a3a3;
+  --cor-primaria: #d4af37;
+  --cor-primaria-hover: #e5c158;
+  --cor-menu: #050505;
+  --cor-menu-texto: #f5f5f5;
+  --cor-borda: #2a2a2a;
+  --sombra: 0 4px 14px rgba(0, 0, 0, 0.6);
 }
 
 /* Reset e Box Model */
-* {
+- {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -46,8 +52,8 @@ body {
 /* Barra lateral esquerda */
 .barra-lateral {
   width: 240px;
-  background-color: #111827;
-  color: #ffffff;
+  background-color: var(--cor-menu);
+  color: var(--cor-menu-texto);
   border-right: 3px solid var(--cor-primaria);
   padding: 1rem;
   display: flex;
@@ -65,15 +71,15 @@ body {
 
 .logo {
   font-size: 1.3rem;
-  color: #f59e0b;
+  color: var(--cor-primaria);
   white-space: nowrap;
 }
 
 /* Botão de recolher/expandir */
 .btn-recolher {
-  background-color: #1f2937;
-  color: #f59e0b;
-  border: 1px solid #374151;
+  background-color: #1c1c1c;
+  color: var(--cor-primaria);
+  border: 1px solid #333333;
   border-radius: 6px;
   padding: 0.35rem 0.6rem;
   font-size: 1.1rem;
@@ -94,7 +100,7 @@ body {
 }
 
 .menu a {
-  color: #e2e8f0;
+  color: #e5e5e5;
   text-decoration: none;
   font-weight: bold;
   padding: 0.6rem 0.75rem;
@@ -183,9 +189,14 @@ main {
 }
 
 .btn-secundario {
-  background-color: #334155;
+  background-color: #262626;
   color: #ffffff;
+  border: 1px solid #404040;
   font-size: 0.85rem;
+}
+
+.btn-secundario:hover {
+  border-color: var(--cor-primaria);
 }
 
 .largura-total {
@@ -198,6 +209,7 @@ main {
   padding: 2rem;
   border-radius: 10px;
   border: 1px solid var(--cor-borda);
+  box-shadow: var(--sombra);
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -233,7 +245,7 @@ main {
   border: 1px solid var(--cor-borda);
   border-radius: 8px;
   padding: 1.25rem;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--sombra);
 }
 
 .numero-destaque {
@@ -252,6 +264,16 @@ main {
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   margin-bottom: 0.5rem;
+}
+
+/* Contraste preto sobre dourado claro no tema escuro */
+body.escuro .btn-primario,
+body.escuro .btn-outline:hover,
+body.escuro .btn-recolher:hover,
+body.escuro .menu a:hover,
+body.escuro .menu a.ativo,
+body.escuro .badge-categoria {
+  color: #0b0b0b;
 }
 
 .preco-card {
@@ -289,6 +311,8 @@ main {
 }
 
 input[type="text"],
+input[type="email"],
+input[type="password"],
 input[type="tel"],
 input[type="date"],
 select {
@@ -302,7 +326,7 @@ select {
 
 input:focus,
 select:focus {
-  outline: 2px solid #2980b9;
+  outline: 2px solid var(--cor-primaria);
   outline-offset: 2px;
 }
 
@@ -425,8 +449,9 @@ select.valido {
 }
 
 .rodape {
-  background-color: #111827;
-  color: #94a3b8;
+  background-color: var(--cor-menu);
+  color: #a3a3a3;
+  border-top: 2px solid var(--cor-primaria);
   text-align: center;
   padding: 1.25rem 0;
   font-size: 0.9rem;
@@ -467,4 +492,43 @@ select.valido {
     grid-template-columns: 2fr 1fr;
     align-items: start;
   }
+}
+
+/* Botão de Tema no canto superior direito */
+.btn-tema-topo {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid #d4af37;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-tema-topo:hover {
+  transform: translateY(-2px);
+  background-color: #d4af37;
+  color: #111111;
+}
+
+body.escuro .btn-tema-topo {
+  background-color: #1c1c1c;
+  color: #f5f5f5;
+  border-color: #d4af37;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+body.escuro .btn-tema-topo:hover {
+  background-color: #d4af37;
+  color: #111111;
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vilão's Barber - Acesso ao Sistema</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+
+  <aside class="barra-lateral">
+    <div class="topo-lateral">
+      <h1 class="logo">Vilão's Barber</h1>
+      <label for="menu-toggle" class="btn-recolher" title="Recolher/Expandir menu">&#9776;</label>
+    </div>
+
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="agendar.html">Agendar</a></li>
+        <li><a href="agendamentos.html">Meus Agendamentos</a></li>
+        <li><a href="login.html" class="ativo" id="link-auth">Entrar</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="conteudo-principal">
+    <button type="button" id="btn-tema" class="btn-tema-topo" title="Alternar tema">🌙 Escuro</button>
+    <main class="container">
+      <section class="cabecalho-pagina">
+        <h2>Acesso ao Sistema</h2>
+        <p>Entre como Cliente para agendar ou como Administrador para gerenciar a barbearia.</p>
+      </section>
+
+      <div class="layout-duas-colunas">
+        <!-- Formulário de Login -->
+        <article class="card">
+          <h3>Entrar na Conta</h3>
+          <form id="form-login" novalidate>
+            <div class="campo-grupo">
+              <label for="login-email">E-mail</label>
+              <input type="email" id="login-email" placeholder="seuemail@exemplo.com" required />
+            </div>
+
+            <div class="campo-grupo">
+              <label for="login-senha">Senha</label>
+              <input type="password" id="login-senha" placeholder="Digite sua senha" required />
+            </div>
+
+            <button type="submit" class="btn-primario largura-total">Entrar</button>
+            <p id="feedback-login" class="feedback"></p>
+          </form>
+
+          <hr style="margin: 1.25rem 0; border: 0; border-top: 1px solid var(--cor-borda);" />
+          <p style="font-size: 0.85rem; color: var(--cor-texto-suave);">
+            <strong>Acesso Admin (Demonstração):</strong><br />
+            E-mail: <code>admin@vilaos.com</code> | Senha: <code>123456</code>
+          </p>
+        </article>
+
+        <!-- Cadastro rápido de Cliente -->
+        <article class="card">
+          <h3>Novo Cliente? Cadastre-se</h3>
+          <form id="form-cadastro" novalidate>
+            <div class="campo-grupo">
+              <label for="cad-nome">Nome Completo</label>
+              <input type="text" id="cad-nome" placeholder="Ex: João Pedro" required />
+            </div>
+
+            <div class="campo-grupo">
+              <label for="cad-email">E-mail</label>
+              <input type="email" id="cad-email" placeholder="cliente@exemplo.com" required />
+            </div>
+
+            <div class="campo-grupo">
+              <label for="cad-senha">Senha (mín. 4 caracteres)</label>
+              <input type="password" id="cad-senha" placeholder="Crie uma senha" required />
+            </div>
+
+            <button type="submit" class="btn-outline largura-total">Criar Conta de Cliente</button>
+            <p id="feedback-cadastro" class="feedback"></p>
+          </form>
+        </article>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <p>&copy; 2026 Vilão's Barber - Prática de Programação (N2)</p>
+    </footer>
+  </div>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

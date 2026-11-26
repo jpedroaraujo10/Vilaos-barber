@@ -1,5 +1,5 @@
 import { SERVICOS, buscarServicoPorId, calcularValores, formatarMoeda } from "./dados.js";
-import { carregar, salvar, CHAVE_AGENDAMENTOS } from "./storage.js";
+import { carregar, salvar, CHAVE_AGENDAMENTOS, obterUsuarioLogado } from "./storage.js";
 import { inicializarTema } from "./tema.js";
 
 // Classe de erro personalizada herdando de Error
@@ -53,6 +53,12 @@ function inicializarFormulario() {
   const selectHora = document.querySelector("#hora-agendamento");
   const checkFidelidade = document.querySelector("#cliente-fidelidade");
   const feedback = document.querySelector("#feedback-formulario");
+
+  // Preenche o nome automaticamente se houver cliente logado
+  const usuarioLogado = obterUsuarioLogado();
+  if (usuarioLogado && usuarioLogado.tipo === "cliente") {
+    inputNome.value = usuarioLogado.nome;
+  }
 
   // Criação dinâmica de elementos <option> no DOM
   const opcaoInicial = document.createElement("option");
@@ -168,11 +174,13 @@ function inicializarFormulario() {
 
       const servicoEscolhido = buscarServicoPorId(selectServico.value);
       const valores = calcularValores(servicoEscolhido.preco, checkFidelidade.checked);
+      const usuarioAtual = obterUsuarioLogado();
 
       // Criação de objeto literal e persistência no localStorage
       const novoAgendamento = {
         id: Date.now(),
         cliente: inputNome.value.trim(),
+        clienteEmail: usuarioAtual ? usuarioAtual.email : "",
         telefone: inputTelefone.value.trim(),
         servicoNome: servicoEscolhido.nome,
         profissional: selectProfissional.value,
@@ -188,6 +196,10 @@ function inicializarFormulario() {
       feedback.textContent = "Agendamento confirmado com sucesso!";
       feedback.classList.add("sucesso");
       form.reset();
+
+      if (usuarioAtual && usuarioAtual.tipo === "cliente") {
+        inputNome.value = usuarioAtual.nome;
+      }
 
       for (let i = 0; i < campos.length; i++) {
         campos[i].classList.remove("valido", "invalido");
